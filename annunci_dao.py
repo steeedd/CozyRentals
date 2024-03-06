@@ -20,7 +20,6 @@ def inserisciAnnuncio(annuncio):
 
     return success
 
-
 def getIdAnnuncio(annuncio):
     query = 'SELECT id FROM annunci WHERE titolo = ? and descrizione = ? and id_locatore = ? and data_annuncio = ?'
     connection = sqlite3.connect('db/cozy_rentals.db')
