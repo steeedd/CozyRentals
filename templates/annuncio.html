@@ -1,0 +1,278 @@
+{% extends "base.html" %}
+{% block title %} {{super()}} Annuncio {{annuncio.id}} {% endblock %}
+{% block content %}
+{%if annuncio.disponibile == 0 and annuncio.id_locatore != current_user.id%}
+<article class="alert alert-warning fs-6 display-6" role="alert">
+  N.B: L'annuncio in questione non è al momento disponibile!
+</article>
+{%endif%}
+<h1 class = "display-5">{{annuncio.titolo}}</h1>
+<article class = "d-flex border p-2 flex-wrap justify-content-end">
+  <section class = "col-4">
+    <div id="carouselSingoloAnnuncio" class="carousel slide">
+      <div class="carousel-inner">
+        {%if annuncio.url_foto1%}
+        <div class="carousel-item active">
+          <img src="{{url_for('static', filename = 'case/'+annuncio.url_foto1)}}" class="d-block w-100" alt="Immagine 1 dell'annuncio {{annuncio.id}}">
+          {%if current_user.is_authenticated and current_user.id == annuncio.id_locatore%}
+          <form action="{{url_for('elimina_immagine', id = annuncio.id)}}" method="POST">
+            <div>
+              <input type="hidden" name="foto_da_eliminare" value = "{{annuncio.url_foto1}}"/>
+              <button type="submit" class="btn btn-danger fav-button btn-sm">Elimina</button>
+            </div>
+          </form>
+          {%endif%}
+        </div>
+        {%endif%}
+        {%if annuncio.url_foto2%}
+        <div class="carousel-item">
+          <img src="{{url_for('static', filename = 'case/'+annuncio.url_foto2)}}" class="d-block w-100" alt="Immagine 2 dell'annuncio {{annuncio.id}}">
+          {%if current_user.is_authenticated and current_user.id == annuncio.id_locatore%}
+          <form action="{{url_for('elimina_immagine', id = annuncio.id)}}" method="POST">
+            <div>
+              <input type="hidden" name="foto_da_eliminare" value = "{{annuncio.url_foto2}}"/>
+              <button type="submit" class="btn btn-danger fav-button btn-sm">Elimina</button>
+            </div>
+          </form>
+          {%endif%}
+        </div>
+        {%endif%}
+        {%if annuncio.url_foto3%}
+        <div class="carousel-item">
+          <img src="{{url_for('static', filename = 'case/'+annuncio.url_foto3)}}" class="d-block w-100" alt="Immagine 3 dell'annuncio {{annuncio.id}}">
+          {%if current_user.is_authenticated and current_user.id == annuncio.id_locatore%}
+          <form action="{{url_for('elimina_immagine', id = annuncio.id)}}" method="POST">
+            <div>
+              <input type="hidden" name="foto_da_eliminare" value = "{{annuncio.url_foto3}}"/>
+              <button type="submit" class="btn btn-danger fav-button btn-sm">Elimina</button>
+            </div>
+          </form>
+          {%endif%}
+        </div>
+        {%endif%}
+        {%if annuncio.url_foto4%}
+        <div class="carousel-item">
+          <img src="{{url_for('static', filename = 'case/'+annuncio.url_foto4)}}" class="d-block w-100" alt="Immagine 4 dell'annuncio {{annuncio.id}}">
+          {%if current_user.is_authenticated and current_user.id == annuncio.id_locatore%}
+          <form action="{{url_for('elimina_immagine', id = annuncio.id)}}" method="POST">
+            <div>
+              <input type="hidden" name="foto_da_eliminare" value = "{{annuncio.url_foto4}}"/>
+              <button type="submit" class="btn btn-danger fav-button btn-sm">Elimina</button>
+            </div>
+          </form>
+          {%endif%}
+        </div>
+        {%endif%}
+        {%if annuncio.url_foto5%}
+        <div class="carousel-item">
+          <img src="{{url_for('static', filename = 'case/'+annuncio.url_foto5)}}" class="d-block w-100" alt="Immagine 5 dell'annuncio {{annuncio.id}}">
+          {%if current_user.is_authenticated and current_user.id == annuncio.id_locatore%}
+          <form action="{{url_for('elimina_immagine', id = annuncio.id)}}" method="POST">
+            <div>
+              <input type="hidden" name="foto_da_eliminare" value = "{{annuncio.url_foto5}}"/>
+              <button type="submit" class="btn btn-danger fav-button btn-sm">Elimina</button>
+            </div>
+          </form>
+          {%endif%}
+        </div>
+        {%endif%}
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselSingoloAnnuncio" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselSingoloAnnuncio" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </section>
+  <section class = "col-8">
+    <div class = "d-flex justify-content-between align-items-center">
+    <h5 class = "display-6 fs-2 ms-3">{{annuncio.data_annuncio}}</h5>
+    <h5 class = "display-6 fs-2"> Annuncio di <strong>{{annuncio.nome}} {{annuncio.cognome}}</strong></h5>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <p class = "fw-medium fs-6 display-6">{{annuncio.descrizione}}</p>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+          <p class="fw-semibold fs-6 display-6">Indirizzo:</p>
+          <p class="fs-6 display-6">{{annuncio.indirizzo}}</p>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+            <p class="fw-semibold fs-6 display-6">Tipo casa:</p>
+            <p class="fs-6 display-6">{{annuncio.tipo_casa}}</p>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+            <p class="fw-semibold fs-6 display-6">Numero locali:</p>
+            <p class="fs-6 display-6">{{annuncio.numero_locali}}{%if annuncio.numero_locali==5%}+{%endif%}</p>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+            <p class="fw-semibold fs-6 display-6">Prezzo mensile:</p>
+            <p class="fs-6 display-6">{{annuncio.prezzo_mensile}}€</p>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+          <p class="fw-semibold fs-6 display-6">Arredata:</p>
+          {%if annuncio.arredata == 0%}
+          <p class="fs-6 display-6">No</p>
+          {%else%}
+          <p class="fs-6 display-6">Si</p>
+          {%endif%}
+        </li>
+    </ul>
+  </section>
+  {%if current_user.is_authenticated%}
+  {%if current_user.tipo == 'locatore' and current_user.id == annuncio.id_locatore%}
+  <div class = "d-grip gap-2">
+      <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modificaAnnuncio" >Modifica annuncio</button>
+  </div>
+  <div class="modal fade" id="modificaAnnuncio" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modifica annuncio</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="{{url_for('modifica_annuncio', id = annuncio.id)}}" method="POST" enctype="multipart/form-data">
+            <article class="mb-3">
+              <label for="idTitolo" class="col-form-label">Titolo</label>
+              <input type="text" class="form-control" name = "titolo" value="{{annuncio.titolo}}" id="idTitolo" required minlength="7" maxlength="40">
+            </article>
+            <article class="mb-3">
+              <label for="idDescrizione" class="col-form-label">Descrizione</label>
+              <textarea class="form-control"  name = "descrizione" id="idDescrizione" required minlength="100" maxlength="600">{{annuncio.descrizione}}</textarea>
+            </article>
+            <article class="mb-3">
+              <label for="idIndirizzo" class="col-form-label">Indirizzo</label>
+              <input type="text" class="form-control" name = "indirizzo" value = "{{annuncio.indirizzo}}" id="idIndirizzo" disabled required minlength="5">
+            </article>
+            <section class="mb-3 d-flex row">
+              <article class = "col-6">
+                <label for = "idTipocasa">Tipologia abitazione</label>
+                <select id = "idTipocasa" name = "tipo_casa" class="form-select" aria-label="Default select example" required>
+                  {%if annuncio.tipo_casa == 'Casa indipendente'%}
+                  <option selected value="Casa indipendente">Casa indipendente</option>
+                  {%else%}
+                  <option value="Casa indipendente">Casa indipendente</option>
+                  {%endif%}
+                  {%if annuncio.tipo_casa == 'Appartamento'%}
+                  <option selected value="Appartamento">Appartamento</option>
+                  {%else%}
+                  <option value="Appartamento">Appartamento</option>
+                  {%endif%}
+                  {%if annuncio.tipo_casa == 'Loft'%}
+                  <option selected value="Loft">Loft</option>
+                  {%else%}
+                  <option  value="Loft">Loft</option>
+                  {%endif%}
+                  {%if annuncio.tipo_casa == 'Villa'%}
+                  <option selected value = "Villa">Villa</option>
+                  {%else%}
+                  <option value = "Villa">Villa</option>
+                  {%endif%}
+                </select>
+              </article>
+              <article class = "col-6">
+                <label for = "idNumerolocali">Numero di locali</label>
+                <select id = "idNumerolocali" name = "numero_locali" class="form-select" aria-label="Default select example" required>
+                  {%if annuncio.numero_locali == 1%}
+                  <option selected value="1">1</option>
+                  {%else%}
+                  <option value="1">1</option>
+                  {%endif%}
+                  {%if annuncio.numero_locali == 2%}
+                  <option selected value="2">2</option>
+                  {%else%}
+                  <option value="2">2</option>
+                  {%endif%}
+                  {%if annuncio.numero_locali == 3%}
+                  <option selected value="3">3</option>
+                  {%else%}
+                  <option value="3">3</option>
+                  {%endif%}
+                  {%if annuncio.numero_locali == 4%}
+                  <option selected value = "4">4</option>
+                  {%else%}
+                  <option  value = "4">4</option>
+                  {%endif%}
+                  {%if annuncio.numero_locali == 5%}
+                  <option selected value = "5">5+</option>
+                  {%else%}
+                  <option value = "5">5+</option>
+                  {%endif%}
+                </select>
+              </article>
+            </section>
+            <label class = "d-block" for = "idPrezzomensile">Prezzo mensile</label>
+            <article class="input-group mb-3">
+              <span class="input-group-text">€</span>
+              <input type="number" id = "idPrezzomensile" value = "{{annuncio.prezzo_mensile}}" name = "prezzo_mensile" class="form-control" aria-label="Amount (to the nearest dollar)" required min="0">
+              <span class="input-group-text">.00</span>
+            </article>
+            <article class="mb-3">
+              <label for="formFileMultiple" class="form-label">Carica alcune foto dell'abitazione (massimo 5)</label>
+              <input class="form-control" name = "foto_abitazione[]" type="file" id="formFileMultiple" multiple>
+            </article>
+            <section class = "mb-3 d-flex justify-content-center">
+              <article class="form-check form-switch col-6">
+                {%if annuncio.arredata == 1%}
+                <input class="form-check-input" name = "arredata" type="checkbox" role="switch" id="idArredata" checked>
+                {%else%}
+                <input class="form-check-input" name = "arredata"  type="checkbox" role="switch" id="idArredata">
+                {%endif%}
+                <label class="form-check-label" for="idArredata">Arredata</label>
+              </article>
+              <article class="form-check form-switch col-6">
+                {%if annuncio.disponibile == 1%}
+                <input class="form-check-input" name = "disponibile" type="checkbox" role="switch" id="idDisponibile" checked>
+                {%else%}
+                <input class="form-check-input" name = "disponibile" type="checkbox" role="switch" id="idDisponibile">
+                {%endif%}
+                <label class="form-check-label" for="idDisponibile">Disponibile</label>
+              </article>
+            </section>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+              <button type="submit" class="btn btn-primary">Modifica annuncio</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  {%endif%}
+  {%if current_user.id != annuncio.id_locatore%}
+  <div class = "d-grip gap-2">
+    <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#prenotazioneVisita">Prenota una visita</button>
+  </div>
+  <div class="modal fade" id="prenotazioneVisita" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Prenotazione</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action = "{{url_for('verifica_disponibilità', id = annuncio.id)}}" method="POST">
+            <div class = "mb-3">
+              <label for = "date" class = "col-form-label">Quando vorresti visitare la casa?</label>
+              <input name = 'data' class="form-control" type="date" aria-label="default input example" id = "date" min="{{domani}}" max = "{{sette_giorni_dopo}}" required>
+              <div id="passwordHelp" class="form-text">Puoi richiedere una visita solamente per i prossimi sette giorni!</div>
+            </div>  
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+              <button type="submit" class="btn btn-success">Verifica disponibilità</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  {%endif%}
+  {%endif%}
+</article>
+
+
+{%endblock%}

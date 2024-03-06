@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %} {{super()}} Accedi {% endblock %}
+{%block active_login%} active {%endblock%}
+{% block content %}
+<article class="col-4 bg-light p-4 border rounded">
+    <form action="{{url_for('login')}}" method="POST">
+        <section class="mb-3">
+            <label for="emailInput" class="form-label">Email</label>
+            <input type="text" class="form-control" name="email" id="emailInput">
+        </section>
+        <section class="mb-3">
+            <label for="passwordInput" class="form-label">Password</label>
+            <input type="password" class="form-control" name="password" id="passwordInput">
+            <div id="passwordHelp" class="form-text">Non condivideremo mai la tua password con nessun altro.</div>
+        </section>
+        <section class="mb-3">
+            <p>Non sei ancora registrato? <a href="{{url_for('iscriviti')}}">Clicca qui</a></p>
+        </section>
+        <button type="submit" class="btn btn-primary">Accedi</button>
+    </form>
+</article>
+{% endblock %}

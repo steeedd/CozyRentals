@@ -1,0 +1,47 @@
+{%extends "base.html"%}
+{%block title%} {{ super() }} Prenotazione {%endblock%}
+{%block content%}
+
+<article class="alert alert-info" role="alert">
+    Hai selezionato la data: {{data_scelta}}. Compila il form sottostante per completare la prenotazione, indicando il tipo di visita che vuoi sostentere e la fascia oraria!
+</article>
+<article class="col-4 bg-light p-4 border rounded">
+    <form action = "{{url_for('nuova_prenotazione', id = id_annuncio)}}" method="POST">
+        <section class = "d-flex justify-content-around flex-wrap mb-3">
+            <p class="col-12 mb-negativo">Come vorresti visitare la casa?</p>
+            <div class="form-check col-6">
+                <input class="form-check-input" type="radio" name="tipo_visita" id="radioDiPersona" value = "Di persona" checked>
+                <label class="form-check-label" for="radioDiPersona">
+                Di persona
+                </label>
+            </div>
+            <div class="form-check col-6">
+                <input class="form-check-input" type="radio" name="tipo_visita" id="radioDaRemoto" value = "Da remoto">
+                <label class="form-check-label" for="radioDaRemoto">
+                Da remoto
+                </label>
+            </div>
+        </section>
+        <section class = "mb-3">
+            <label for = "date" class = "col-form-label">Data selezionata</label>
+            <input class="form-control" type="date" aria-label="default input example" id = "date" value = "{{data_scelta}}" disabled>
+        </section>
+        <section class = "mb-3">
+          <label class = "col-form-label" for = "idFasciaOraria">Seleziona una fascia oraria</label>
+          <select id = "idFasciaOraria" name = "fascia_oraria" class="form-select" aria-label="Default select example" required>
+            <option selected></option>
+            {%for fascia in fasce_disponibili%}
+            <option value = "{{fascia}}">{{fascia}}</option>
+            {%endfor%}
+          </select>
+        </section>
+        <input name = 'data' class="form-control" type="hidden" aria-label="default input example" id = "date" value = {{data_scelta}}>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success">Prenota</button>
+        </div>
+    </form>
+</article>
+
+
+
+{%endblock%}

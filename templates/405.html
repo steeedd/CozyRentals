@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}405 - Unauthorized{% endblock %}
+
+{% block content %}
+<section id="notfound-message">
+    <h1 class = "text-warning"> ERROR 405: Unauthorized</h1>
+    <h2 class = "display-6">Accesso negato: verifica di esserti autenticato correttamente!</h2>
+    <section class="d-flex justify-content-center">
+        <i id = "unauthorizedIcon" class="bi bi-exclamation-triangle"></i>
+    </section>
+    <section class = "d-flex justify-content-end align-items-center">
+        <a href="{{ url_for('home') }}"><i id = "backHomeIcon" class="bi bi-house-door"></i></a> 
+    </section>
+
+</section>
+{% endblock %}

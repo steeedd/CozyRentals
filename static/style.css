@@ -1,0 +1,88 @@
+#myNavbar {
+    background-color: #e3f2fd;
+}
+
+#logo {
+    width: 30%;
+    height: auto;
+}
+
+.usrimg {
+    width: 10%;
+    height: auto;
+    vertical-align: middle;
+    margin: 0.5rem 0.5rem 0.5rem 0rem;
+}
+
+.card_annuncio {
+    width: 18rem;
+}
+
+.mb-negativo{
+    margin-bottom: 1%;
+}
+
+.prenotazione_richiesta {
+    color:blue
+}
+
+.prenotazione_accettata {
+    color: green;
+}
+
+.prenotazione_rifiutata {
+    color: red;
+}
+
+#sezionePrenotazioniAccettate{
+    background-color: rgb(8, 203, 8);
+}
+
+#iconaPrenotazioneAccettata{
+    font-size: 2.25rem;
+}
+
+#sezionePrenotazioniRichieste{
+    background-color: rgb(162, 162, 255);
+
+}
+
+#iconaPrenotazioneRichiesta{
+    font-size: 2.25rem;
+}
+
+#sezionePrenotazioniRifiutate{
+    background-color: rgb(247, 33, 33);
+}
+
+#iconaPrenotazioneRifiutata{
+    font-size: 2.25rem;
+}
+
+.fav-button {
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
+    z-index: 999;
+  }
+
+.fav-button2 {
+    position: absolute;
+    top: 0.5em;
+    left: 0.5em;
+    z-index: 999;
+}
+
+#errorIcon{
+    font-size: 10rem;
+    color: red;
+}
+
+#unauthorizedIcon{
+    font-size: 10rem;
+    color: rgb(224, 224, 10);
+}
+
+#backHomeIcon{
+    font-size: 7rem;
+}

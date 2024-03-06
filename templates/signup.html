@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %} {{super()}} Registrati {% endblock %}
+{%block active_registrazione%} active {%endblock%}
+{% block content %}
+
+<article class="col-4 bg-light p-4 border rounded">
+    <form action="{{url_for('signup')}}" method="POST" enctype="multipart/form-data">
+        <section class="row g-3 mb-3">
+            <div class="col">
+                <label for = "idNome">Nome</label> 
+                <input type="text" class="form-control" name="nome" id = "idNome" placeholder="Nome" aria-label="First name" required minlength="2">
+            </section>
+            <section class="col">
+                <label for = "idCognome">Cognome</label>
+                <input type="text" class="form-control" name = "cognome" placeholder="Cognome" id= "idCognome" aria-label="Last name" required minlength="2">
+            </section>
+        </sectione>
+        <section class="mb-3">
+            <label for="emailInput" class="form-label">Email</label>
+            <input type="text" class="form-control" name="email" id="emailInput" placeholder="nome@example.com" required>
+        </section>
+        <section class="mb-3">
+            <label for="passwordInput" class="form-label">Password</label>
+            <input type="password" class="form-control" name="password" id="passwordInput" minlength = "7" required>
+            <div id="passwordHelp" class="form-text">La password dovrà essere formata da minimo sette caratteri, compreso un numero.</div>
+        </section>
+        <section class="mb-3">
+            <label for="formFile" class="form-label">Inserisci la tua immagine profilo (facoltativa)</label>
+            <input class="form-control" type="file" id="formFile" name="immagine_profilo">
+        </section>
+        
+        <section class="form-check form-switch mb-3">
+            <input class="form-check-input" name = "locatore" type="checkbox" role="switch" id="idLocatore">
+            <label class="form-check-label" for="idLocatore">Desidero essere un locatore</label>
+        </section>
+
+        <button type="submit" class="btn btn-primary">Registrati</button>
+    </form>
+</article>
+
+{%endblock%}
